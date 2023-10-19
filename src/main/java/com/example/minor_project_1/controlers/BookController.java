@@ -1,13 +1,13 @@
 package com.example.minor_project_1.controlers;
 
+import com.example.minor_project_1.domain.Book;
 import com.example.minor_project_1.dtos.CreateBookRequest;
 import com.example.minor_project_1.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 public class BookController {
@@ -19,5 +19,11 @@ public class BookController {
     public void createBook(@RequestBody @Valid CreateBookRequest request){
         bookService.createBook(request.toBook());
     }
+
+    @GetMapping("/book")
+    public List<Book> findBook(@RequestParam("key") String key, @RequestParam("value") String value){
+        return bookService.find(key, value);
+    }
+
 
 }
